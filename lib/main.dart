@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:product_api/feature/views/screens/auth/signin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_api/feature/data/di/injectable.dart';
+import 'package:product_api/feature/views/screens/splash/splashscreen.dart';
+import 'package:product_api/feature/views/state/bloc/bloc/getproducts_bloc.dart';
+import 'package:product_api/feature/views/state/bloc/login/login_bloc.dart';
+import 'package:product_api/feature/views/state/bloc/splash/splash_bloc.dart';
+import 'package:product_api/feature/views/state/cubit/carousal/carousalcubit_cubit.dart';
+import 'package:product_api/feature/views/state/cubit/passvisibilty/passvisibilty_cubit.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await configureinjection();
   runApp(const MyApp());
 }
 
@@ -10,13 +19,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const SIgnInScreen(),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<PassvisibiltyCubit>(
+            create: (context) => PassvisibiltyCubit(),
+          ),
+          BlocProvider<CarousalcubitCubit>(
+            create: (context) => CarousalcubitCubit(),
+          ),
+          BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(),
+          ),
+          BlocProvider<SplashBloc>(
+            create: (context) => SplashBloc(),
+          ),
+          BlocProvider(
+            create: (context) => getit<GetproductsBloc>(),
+          ),
+        ],
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: const SplashScreen(),
+        ));
   }
 }
