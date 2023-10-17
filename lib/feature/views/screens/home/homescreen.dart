@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
 import 'package:product_api/feature/views/screens/add/addproductscreen.dart';
 import 'package:product_api/feature/views/screens/home/widgets/listingwidget.dart';
 import 'package:product_api/feature/views/screens/home/widgets/searchwidget.dart';
+import 'package:product_api/feature/views/screens/splash/splashscreen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -22,6 +25,22 @@ class HomeScreen extends StatelessWidget {
         ),
         elevation: 2,
         bottomOpacity: 3,
+        actions: [
+          IconButton(
+              onPressed: () async {
+                final sharedprefs = await SharedPreferences.getInstance();
+
+                sharedprefs.clear();
+                // ignore: use_build_context_synchronously
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SplashScreen(),
+                    ),
+                    (route) => false);
+              },
+              icon: const Icon(Iconsax.logout))
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),

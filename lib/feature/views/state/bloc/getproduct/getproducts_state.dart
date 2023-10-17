@@ -3,7 +3,7 @@ part of 'getproducts_bloc.dart';
 @freezed
 class GetproductsState with _$GetproductsState {
   const factory GetproductsState.haveProducts(
-      {required List<ProductModel>? productslist}) = HaveProductsState;
+      {required List<CreateProductModel>? productslist}) = HaveProductsState;
   const factory GetproductsState.failedState({required String error}) =
       FailedState;
 

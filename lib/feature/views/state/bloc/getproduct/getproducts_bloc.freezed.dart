@@ -168,19 +168,20 @@ abstract class Getallproducts implements GetproductsEvent {
 mixin _$GetproductsState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<ProductModel>? productslist) haveProducts,
+    required TResult Function(List<CreateProductModel>? productslist)
+        haveProducts,
     required TResult Function(String error) failedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<ProductModel>? productslist)? haveProducts,
+    TResult? Function(List<CreateProductModel>? productslist)? haveProducts,
     TResult? Function(String error)? failedState,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<ProductModel>? productslist)? haveProducts,
+    TResult Function(List<CreateProductModel>? productslist)? haveProducts,
     TResult Function(String error)? failedState,
     required TResult orElse(),
   }) =>
@@ -230,7 +231,7 @@ abstract class _$$HaveProductsStateImplCopyWith<$Res> {
           $Res Function(_$HaveProductsStateImpl) then) =
       __$$HaveProductsStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<ProductModel>? productslist});
+  $Res call({List<CreateProductModel>? productslist});
 }
 
 /// @nodoc
@@ -250,7 +251,7 @@ class __$$HaveProductsStateImplCopyWithImpl<$Res>
       productslist: freezed == productslist
           ? _value._productslist
           : productslist // ignore: cast_nullable_to_non_nullable
-              as List<ProductModel>?,
+              as List<CreateProductModel>?,
     ));
   }
 }
@@ -259,12 +260,12 @@ class __$$HaveProductsStateImplCopyWithImpl<$Res>
 
 class _$HaveProductsStateImpl implements HaveProductsState {
   const _$HaveProductsStateImpl(
-      {required final List<ProductModel>? productslist})
+      {required final List<CreateProductModel>? productslist})
       : _productslist = productslist;
 
-  final List<ProductModel>? _productslist;
+  final List<CreateProductModel>? _productslist;
   @override
-  List<ProductModel>? get productslist {
+  List<CreateProductModel>? get productslist {
     final value = _productslist;
     if (value == null) return null;
     if (_productslist is EqualUnmodifiableListView) return _productslist;
@@ -300,7 +301,8 @@ class _$HaveProductsStateImpl implements HaveProductsState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<ProductModel>? productslist) haveProducts,
+    required TResult Function(List<CreateProductModel>? productslist)
+        haveProducts,
     required TResult Function(String error) failedState,
   }) {
     return haveProducts(productslist);
@@ -309,7 +311,7 @@ class _$HaveProductsStateImpl implements HaveProductsState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<ProductModel>? productslist)? haveProducts,
+    TResult? Function(List<CreateProductModel>? productslist)? haveProducts,
     TResult? Function(String error)? failedState,
   }) {
     return haveProducts?.call(productslist);
@@ -318,7 +320,7 @@ class _$HaveProductsStateImpl implements HaveProductsState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<ProductModel>? productslist)? haveProducts,
+    TResult Function(List<CreateProductModel>? productslist)? haveProducts,
     TResult Function(String error)? failedState,
     required TResult orElse(),
   }) {
@@ -362,10 +364,10 @@ class _$HaveProductsStateImpl implements HaveProductsState {
 
 abstract class HaveProductsState implements GetproductsState {
   const factory HaveProductsState(
-          {required final List<ProductModel>? productslist}) =
+          {required final List<CreateProductModel>? productslist}) =
       _$HaveProductsStateImpl;
 
-  List<ProductModel>? get productslist;
+  List<CreateProductModel>? get productslist;
   @JsonKey(ignore: true)
   _$$HaveProductsStateImplCopyWith<_$HaveProductsStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -435,7 +437,8 @@ class _$FailedStateImpl implements FailedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(List<ProductModel>? productslist) haveProducts,
+    required TResult Function(List<CreateProductModel>? productslist)
+        haveProducts,
     required TResult Function(String error) failedState,
   }) {
     return failedState(error);
@@ -444,7 +447,7 @@ class _$FailedStateImpl implements FailedState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(List<ProductModel>? productslist)? haveProducts,
+    TResult? Function(List<CreateProductModel>? productslist)? haveProducts,
     TResult? Function(String error)? failedState,
   }) {
     return failedState?.call(error);
@@ -453,7 +456,7 @@ class _$FailedStateImpl implements FailedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(List<ProductModel>? productslist)? haveProducts,
+    TResult Function(List<CreateProductModel>? productslist)? haveProducts,
     TResult Function(String error)? failedState,
     required TResult orElse(),
   }) {

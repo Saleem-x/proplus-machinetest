@@ -1,12 +1,16 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
-import 'package:product_api/feature/data/models/product_model/product_model.dart';
+import 'package:product_api/feature/data/models/create_product_model/create_product_model.dart';
 import 'package:product_api/feature/views/state/cubit/carousal/carousalcubit_cubit.dart';
 
 class ProductOverview extends StatelessWidget {
-  final ProductModel product;
+  final CreateProductModel product;
   const ProductOverview({super.key, required this.product});
 
   @override
@@ -30,15 +34,18 @@ class ProductOverview extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               children: [
                 PageView.builder(
-                  itemCount: product.images!.length,
+                  itemCount: 1,
                   onPageChanged: (value) {
                     context.read<CarousalcubitCubit>().changePage(value);
                   },
                   itemBuilder: (context, page) => ClipRRect(
-                    child: Image.network(
-                      product.images![page],
-                      fit: BoxFit.cover,
-                    ),
+                    child: Image.network(product.productImage!,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) =>
+                            Image.network(
+                              emptyimage,
+                              fit: BoxFit.cover,
+                            )),
                   ),
                 ),
                 Positioned(
@@ -48,17 +55,22 @@ class ProductOverview extends StatelessWidget {
                     child: BlocBuilder<CarousalcubitCubit, CarousalcubitState>(
                       builder: (context, state) {
                         return ListView.builder(
-                          itemCount: product.images!.length,
+                          itemCount: 1,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, pointer) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 5),
-                            child: Container(
-                              height: 8,
-                              width: state.idx == pointer ? 20 : 8,
-                              decoration: BoxDecoration(
-                                color: kcolorgrey,
-                                borderRadius: BorderRadius.circular(20),
+                            child: InkWell(
+                              onTap: () {
+                                log(product.productImage!);
+                              },
+                              child: Container(
+                                height: 8,
+                                width: state.idx == pointer ? 20 : 8,
+                                decoration: BoxDecoration(
+                                  color: kcolorgrey,
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                               ),
                             ),
                           ),
@@ -76,7 +88,7 @@ class ProductOverview extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Text(
-              product.title!,
+              product.productName!,
               style: kprimaryfont(
                   color: kcolorblack,
                   fontWeight: FontWeight.bold,
@@ -86,7 +98,7 @@ class ProductOverview extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Text(
-              '₹${product.price}',
+              '₹${product.salesRate}',
               style: kprimaryfont(
                 color: kcolorred,
                 fontWeight: FontWeight.bold,
@@ -106,10 +118,10 @@ class ProductOverview extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       fontSize: 14),
                 ),
-                Text(
-                  'Posted On:${product.category!.creationAt}',
-                  style: kprimaryfont(color: kcolorblack, fontSize: 12),
-                ),
+                // Text(
+                //   'Posted On:${product.category!.creationAt}',
+                //   style: kprimaryfont(color: kcolorblack, fontSize: 12),
+                // ),
               ],
             ),
           ),
@@ -130,7 +142,7 @@ class ProductOverview extends StatelessWidget {
                       fontSize: 14),
                 ),
                 Text(
-                  '${product.id}',
+                  '${product.productCode}',
                   style: kprimaryfont(color: kcolorblack, fontSize: 12),
                 ),
               ],
@@ -151,7 +163,7 @@ class ProductOverview extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    product.description!,
+                    product.productName!,
                     style: kprimaryfont(color: kcolorblack, fontSize: 12),
                   ),
                 ),

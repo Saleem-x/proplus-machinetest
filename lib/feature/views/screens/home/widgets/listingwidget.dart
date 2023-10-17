@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/feature/views/product/productview.dart';
 import 'package:product_api/feature/views/screens/home/widgets/productskelton.dart';
-import 'package:product_api/feature/views/state/bloc/bloc/getproducts_bloc.dart';
+import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart';
 
 class ProductListingWidget extends StatelessWidget {
   const ProductListingWidget({
@@ -11,7 +12,9 @@ class ProductListingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<GetproductsBloc>().add(const Getallproducts());
+    context
+        .read<GetproductsBloc>()
+        .add(const GetproductsEvent.getallproducts());
     final Size size = MediaQuery.of(context).size;
     return BlocConsumer<GetproductsBloc, GetproductsState>(
       listener: (context, state) {},
@@ -55,7 +58,14 @@ class ProductListingWidget extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: Image.network(
-                                      productslist[index].images![0],
+                                      errorBuilder:
+                                          (context, error, stackTrace) =>
+                                              Image.network(
+                                        emptyimage,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      productslist[index].productImage ??
+                                          emptyimage,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -79,17 +89,19 @@ class ProductListingWidget extends StatelessWidget {
                                             Flexible(
                                               flex: 2,
                                               child: Text(
-                                                productslist[index].title!,
+                                                productslist[index]
+                                                        .productName ??
+                                                    'asd',
                                                 maxLines: 1,
                                                 softWrap: false,
                                                 overflow: TextOverflow.ellipsis,
                                               ),
                                             ),
-                                            Flexible(
-                                                child: Text(
-                                                    'Posted on :${productslist[index].category!.creationAt}')),
+                                            // Flexible(
+                                            //     child: Text(
+                                            //         'Posted on :${productslist[index].}')),
                                             Text(
-                                                '₹ ${productslist[index].price}')
+                                                '₹ ${productslist[index].salesRate}')
                                           ]),
                                     ),
                                   ],

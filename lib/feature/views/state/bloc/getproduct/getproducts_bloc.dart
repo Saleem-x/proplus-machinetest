@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:product_api/core/failures/failures.dart';
+import 'package:product_api/feature/data/models/create_product_model/create_product_model.dart';
 import 'package:product_api/feature/data/models/product_model/product_model.dart';
 import 'package:product_api/feature/data/repos/abstractrepos.dart';
 
@@ -15,7 +16,7 @@ class GetproductsBloc extends Bloc<GetproductsEvent, GetproductsState> {
   final IGetProductRepo getProductRepo;
   GetproductsBloc(this.getProductRepo) : super(GetproductsState.initial()) {
     on<Getallproducts>((event, emit) async {
-      Either<MainFailures, List<ProductModel>> getproducts =
+      Either<MainFailures, List<CreateProductModel>> getproducts =
           await getProductRepo.getAllProducts();
 
       emit(

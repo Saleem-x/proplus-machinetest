@@ -17,7 +17,7 @@ class LoginRepo {
       );
       if (response.statusCode == 200) {
         Map<String, dynamic> responseMap = jsonDecode(response.body);
-        String message = responseMap['message'];
+        String message = responseMap['data']['token'];
         final sharedprefs = await SharedPreferences.getInstance();
         await sharedprefs.clear();
         await sharedprefs.setString('user', message);
