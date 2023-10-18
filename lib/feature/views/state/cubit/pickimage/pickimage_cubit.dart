@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,15 +8,15 @@ class PickimageCubit extends Cubit<PickimageState> {
   PickimageCubit() : super(PickimageState.initial());
 
   void pickimage() async {
-    String? base64Image;
-    XFile? data = await ImagePicker().pickImage(source: ImageSource.gallery);
+    // String? base64Image;
+    XFile? data = await ImagePicker().pickMedia();
 
     if (data != null) {
-      List<int> imageBytes = await data.readAsBytes();
+      // List<int> imageBytes = await data.readAsBytes();
       // base64Image = data.path;
 
-      base64Image = base64Encode(imageBytes);
-      log('$imageBytes');
+      // base64Image = base64Encode(imageBytes);
+      // log('$imageBytes');
       emit(Imageurls(imageurls: data));
     }
   }

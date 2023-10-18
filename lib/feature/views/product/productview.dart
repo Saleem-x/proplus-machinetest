@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
@@ -22,6 +21,13 @@ VideoPlayerController? controller;
 
 class _ProductOverviewState extends State<ProductOverview> {
   @override
+  void initState() {
+    controller = VideoPlayerController.networkUrl(
+        Uri.parse(widget.product.productImage!))
+      ..initialize().then((_) {});
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -213,7 +219,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 ),
                 Flexible(
                   child: Text(
-                    widget.product.productImage ?? 'no description available',
+                    widget.product.mrp ?? 'no description available',
                     style: kprimaryfont(color: kcolorblack, fontSize: 12),
                   ),
                 ),

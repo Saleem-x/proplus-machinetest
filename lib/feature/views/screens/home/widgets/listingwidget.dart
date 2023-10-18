@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_api/core/api/endpoints.dart';
+import 'package:product_api/core/constents/colors/kcolors.dart';
+import 'package:product_api/core/constents/fonts/kfonts.dart';
 import 'package:product_api/feature/views/product/productview.dart';
 import 'package:product_api/feature/views/screens/home/widgets/productskelton.dart';
 import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart';
@@ -64,8 +66,16 @@ class ProductListingWidget extends StatelessWidget {
                                         emptyimage,
                                         fit: BoxFit.cover,
                                       ),
-                                      productslist[index].productImage ??
-                                          emptyimage,
+                                      productslist[index].productImage == null
+                                          ? emptyimage
+                                          : productslist[index]
+                                                      .productImage!
+                                                      .split('.')
+                                                      .last ==
+                                                  'mp4'
+                                              ? videotemp
+                                              : productslist[index]
+                                                  .productImage!,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -114,7 +124,15 @@ class ProductListingWidget extends StatelessWidget {
                     );
                   },
                 ),
-          failedState: (error) => const SizedBox(),
+          failedState: (error) => SizedBox(
+            child: Column(children: [
+              Text(
+                'Something went wrong\n please refresh',
+                style: kprimaryfont(color: kcolorblack),
+                textAlign: TextAlign.center,
+              )
+            ]),
+          ),
         );
       },
     );
