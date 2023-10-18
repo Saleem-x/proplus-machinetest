@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,8 +16,11 @@ class PickimageCubit extends Cubit<PickimageState> {
 
     if (data != null) {
       List<int> imageBytes = await data.readAsBytes();
+      // base64Image = data.path;
+
       base64Image = base64Encode(imageBytes);
+      log('$imageBytes');
+      emit(Imageurls(imageurls: data));
     }
-    emit(Imageurls(imageurls: base64Image));
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/core/failures/failures.dart';
@@ -14,33 +15,33 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AddProductRepo implements IADDProductRepo {
   @override
   Future<Either<MainFailures, String>> addProducts(
-      CreateProductModel product) async {
+      CreateProductModel product, XFile imgfile) async {
     try {
       final sharedprefs = await SharedPreferences.getInstance();
 
-      log('here');
       final token = sharedprefs.getString('user');
+      var request = http.MultipartRequest('POST', Uri.parse(createproduct));
 
-      final response = await http.post(Uri.parse(createproduct), body: {
-        "ProductID": product.productCode,
-        "ProductCode": product.productCode,
-        "ProductName": product.productName,
-        "SalesRate": product.salesRate.toString(),
-        "ProductImage": product.productImage
-      }, headers: {
-        "Authorization": 'Bearer $token'
+      request.files.add(await http.MultipartFile.fromPath(
+          'ProductImage', imgfile.path,
+          filename: '${product.productCode}/image.jpg'));
+      request.headers['Authorization'] = "Bearer $token";
+      request.fields['ProductID'] = product.productCode!;
+      request.fields['ProductCode'] = product.productCode!;
+      request.fields['ProductName'] = product.productName!;
+      request.fields['SalesRate'] = product.salesRate.toString();
+      var response = await request.send();
+
+      response.stream.transform(utf8.decoder).listen((event) {
+        log(event);
+
+        if (response.statusCode == 200) {
+          log("${response.headers}");
+        } else {
+          log(response.statusCode.toString() + response.reasonPhrase!);
+        }
       });
-
-      if (response.statusCode == 201) {
-        log(response.body);
-        return right('Success');
-      } else {
-        Map<String, dynamic> responseMap = jsonDecode(response.body);
-        String message = responseMap['message'].toString();
-        log(response.body);
-        log(response.statusCode.toString());
-        return right(message);
-      }
+      return right('success');
     } catch (e) {
       log('addd error -> $e');
       return left(const MainFailures.clientfailure());

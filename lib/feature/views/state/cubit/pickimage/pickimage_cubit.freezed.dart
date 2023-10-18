@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$PickimageState {
-  String? get imageurls => throw _privateConstructorUsedError;
+  XFile? get imageurls => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? imageurls) imageurls,
+    required TResult Function(XFile? imageurls) imageurls,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? imageurls)? imageurls,
+    TResult? Function(XFile? imageurls)? imageurls,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? imageurls)? imageurls,
+    TResult Function(XFile? imageurls)? imageurls,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $PickimageStateCopyWith<$Res> {
           PickimageState value, $Res Function(PickimageState) then) =
       _$PickimageStateCopyWithImpl<$Res, PickimageState>;
   @useResult
-  $Res call({String? imageurls});
+  $Res call({XFile? imageurls});
 }
 
 /// @nodoc
@@ -83,7 +83,7 @@ class _$PickimageStateCopyWithImpl<$Res, $Val extends PickimageState>
       imageurls: freezed == imageurls
           ? _value.imageurls
           : imageurls // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as XFile?,
     ) as $Val);
   }
 }
@@ -96,7 +96,7 @@ abstract class _$$ImageurlsImplCopyWith<$Res>
       __$$ImageurlsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? imageurls});
+  $Res call({XFile? imageurls});
 }
 
 /// @nodoc
@@ -116,7 +116,7 @@ class __$$ImageurlsImplCopyWithImpl<$Res>
       imageurls: freezed == imageurls
           ? _value.imageurls
           : imageurls // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as XFile?,
     ));
   }
 }
@@ -127,7 +127,7 @@ class _$ImageurlsImpl implements Imageurls {
   const _$ImageurlsImpl({required this.imageurls});
 
   @override
-  final String? imageurls;
+  final XFile? imageurls;
 
   @override
   String toString() {
@@ -155,7 +155,7 @@ class _$ImageurlsImpl implements Imageurls {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String? imageurls) imageurls,
+    required TResult Function(XFile? imageurls) imageurls,
   }) {
     return imageurls(this.imageurls);
   }
@@ -163,7 +163,7 @@ class _$ImageurlsImpl implements Imageurls {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String? imageurls)? imageurls,
+    TResult? Function(XFile? imageurls)? imageurls,
   }) {
     return imageurls?.call(this.imageurls);
   }
@@ -171,7 +171,7 @@ class _$ImageurlsImpl implements Imageurls {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String? imageurls)? imageurls,
+    TResult Function(XFile? imageurls)? imageurls,
     required TResult orElse(),
   }) {
     if (imageurls != null) {
@@ -210,10 +210,10 @@ class _$ImageurlsImpl implements Imageurls {
 }
 
 abstract class Imageurls implements PickimageState {
-  const factory Imageurls({required final String? imageurls}) = _$ImageurlsImpl;
+  const factory Imageurls({required final XFile? imageurls}) = _$ImageurlsImpl;
 
   @override
-  String? get imageurls;
+  XFile? get imageurls;
   @override
   @JsonKey(ignore: true)
   _$$ImageurlsImplCopyWith<_$ImageurlsImpl> get copyWith =>

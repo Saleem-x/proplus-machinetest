@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
+import 'package:product_api/feature/domain/repoimpls/getproductrepo.dart';
 import 'package:product_api/feature/views/screens/add/addproductscreen.dart';
 import 'package:product_api/feature/views/screens/home/widgets/listingwidget.dart';
 import 'package:product_api/feature/views/screens/home/widgets/searchwidget.dart';
 import 'package:product_api/feature/views/screens/splash/splashscreen.dart';
+import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -44,18 +47,24 @@ class HomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                height: size.height * 0.02,
-              ),
-              SearchWidget(size: size),
-              SizedBox(
-                height: size.height * 0.02,
-              ),
-              const ProductListingWidget()
-            ],
+        child: RefreshIndicator(
+          onRefresh: () {
+            context.read<GetproductsBloc>().add(const Getallproducts());
+            return GetProductRepo().getAllProducts();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                SearchWidget(size: size),
+                SizedBox(
+                  height: size.height * 0.02,
+                ),
+                const ProductListingWidget()
+              ],
+            ),
           ),
         ),
       ),

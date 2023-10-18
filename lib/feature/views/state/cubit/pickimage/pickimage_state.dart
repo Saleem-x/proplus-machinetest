@@ -2,7 +2,7 @@ part of 'pickimage_cubit.dart';
 
 @freezed
 class PickimageState with _$PickimageState {
-  const factory PickimageState.imageurls({required String? imageurls}) =
+  const factory PickimageState.imageurls({required XFile? imageurls}) =
       Imageurls;
 
   factory PickimageState.initial() =>

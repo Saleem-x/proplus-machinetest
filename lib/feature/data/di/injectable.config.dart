@@ -15,8 +15,10 @@ import 'package:product_api/feature/domain/repoimpls/addproductrepo.dart'
     as _i4;
 import 'package:product_api/feature/domain/repoimpls/getproductrepo.dart'
     as _i5;
-import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart'
+import 'package:product_api/feature/views/state/bloc/bloc/addproduct_bloc.dart'
     as _i6;
+import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart'
+    as _i7;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -31,8 +33,10 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.lazySingleton<_i3.IADDProductRepo>(() => _i4.AddProductRepo());
     gh.lazySingleton<_i3.IGetProductRepo>(() => _i5.GetProductRepo());
-    gh.factory<_i6.GetproductsBloc>(
-        () => _i6.GetproductsBloc(gh<_i3.IGetProductRepo>()));
+    gh.factory<_i6.AddproductBloc>(
+        () => _i6.AddproductBloc(gh<_i3.IADDProductRepo>()));
+    gh.factory<_i7.GetproductsBloc>(
+        () => _i7.GetproductsBloc(gh<_i3.IGetProductRepo>()));
     return this;
   }
 }

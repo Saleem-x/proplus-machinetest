@@ -29,6 +29,7 @@ class SplashScreen extends StatelessWidget {
           );
         },
         builder: (context, state) {
+          context.read<SplashBloc>().add(const CheckLogin());
           return const Center(child: CircularProgressIndicator());
         },
       ),

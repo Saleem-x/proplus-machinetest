@@ -1,21 +1,41 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
 import 'package:product_api/feature/data/models/create_product_model/create_product_model.dart';
 import 'package:product_api/feature/views/state/cubit/carousal/carousalcubit_cubit.dart';
+import 'package:product_api/feature/views/state/cubit/playvideo/playvideo_cubit.dart';
+import 'package:video_player/video_player.dart';
 
-class ProductOverview extends StatelessWidget {
+class ProductOverview extends StatefulWidget {
   final CreateProductModel product;
   const ProductOverview({super.key, required this.product});
 
   @override
+  State<ProductOverview> createState() => _ProductOverviewState();
+}
+
+VideoPlayerController? controller;
+initialzectrl(String url) {
+  controller = VideoPlayerController.networkUrl(Uri.parse(url))
+    ..initialize().then((_) {});
+}
+
+class _ProductOverviewState extends State<ProductOverview> {
+  @override
+  void initState() {
+    initialzectrl(widget.product.productImage!);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    context
+        .read<PlayvideoCubit>()
+        .initcontroller(controller!, widget.product.productImage!);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -38,18 +58,71 @@ class ProductOverview extends StatelessWidget {
                   onPageChanged: (value) {
                     context.read<CarousalcubitCubit>().changePage(value);
                   },
-                  itemBuilder: (context, page) => ClipRRect(
-                    child: Image.network(product.productImage!,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            Image.network(
-                              emptyimage,
-                              fit: BoxFit.cover,
-                            )),
-                  ),
+                  itemBuilder: (context, page) {
+                    return widget.product.productImage!.endsWith('.jpg')
+                        ? ClipRRect(
+                            child: Image.network(widget.product.productImage!,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    Image.network(
+                                      emptyimage,
+                                      fit: BoxFit.cover,
+                                    )))
+                        : widget.product.productImage!.endsWith('.mp4')
+                            ? Stack(
+                                children: [
+                                  VideoPlayer(controller!),
+                                  controller!.value.isPlaying
+                                      ? InkWell(
+                                          onTap: () {
+                                            controller!.value.isPlaying
+                                                ? controller!.pause()
+                                                : controller!.play();
+                                            setState(() {});
+                                          },
+                                          child: SizedBox(
+                                            height: size.width - 100,
+                                            width: size.width,
+                                          ),
+                                        )
+                                      : Container(
+                                          height: size.width - 100,
+                                          width: size.width,
+                                          color: kcolorgrey.withOpacity(0.6),
+                                          child: Center(
+                                            child: IconButton(
+                                                onPressed: () {
+                                                  controller!.value.isPlaying
+                                                      ? controller!.pause()
+                                                      : controller!.play();
+                                                  // setState(() {});
+                                                },
+                                                icon: Icon(
+                                                  controller!.value.isPlaying
+                                                      ? Iconsax.pause
+                                                      : Iconsax.play,
+                                                  color: kcolorred,
+                                                  size: 30,
+                                                )),
+                                          ),
+                                        )
+                                ],
+                              )
+                            : ClipRRect(
+                                child: Image.network(
+                                  widget.product.productImage!,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      Image.network(
+                                    emptyimage,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                  },
                 ),
                 Positioned(
-                  bottom: 10,
+                  bottom: 20,
                   child: SizedBox(
                     height: 8,
                     child: BlocBuilder<CarousalcubitCubit, CarousalcubitState>(
@@ -62,7 +135,10 @@ class ProductOverview extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(horizontal: 5),
                             child: InkWell(
                               onTap: () {
-                                log(product.productImage!);
+                                // controller!.value.isPlaying
+                                //     ? controller!.pause()
+                                //     : controller!.play();
+                                // setState(() {});
                               },
                               child: Container(
                                 height: 8,
@@ -88,7 +164,7 @@ class ProductOverview extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Text(
-              product.productName!,
+              widget.product.productName!,
               style: kprimaryfont(
                   color: kcolorblack,
                   fontWeight: FontWeight.bold,
@@ -98,7 +174,7 @@ class ProductOverview extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Text(
-              '₹${product.salesRate}',
+              '₹${widget.product.salesRate}',
               style: kprimaryfont(
                 color: kcolorred,
                 fontWeight: FontWeight.bold,
@@ -142,7 +218,7 @@ class ProductOverview extends StatelessWidget {
                       fontSize: 14),
                 ),
                 Text(
-                  '${product.productCode}',
+                  '${widget.product.productCode}',
                   style: kprimaryfont(color: kcolorblack, fontSize: 12),
                 ),
               ],
@@ -163,7 +239,7 @@ class ProductOverview extends StatelessWidget {
                 ),
                 Flexible(
                   child: Text(
-                    product.productName!,
+                    widget.product.productImage ?? 'no description available',
                     style: kprimaryfont(color: kcolorblack, fontSize: 12),
                   ),
                 ),
@@ -222,5 +298,11 @@ class ProductOverview extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    controller!.dispose();
+    super.dispose();
   }
 }
