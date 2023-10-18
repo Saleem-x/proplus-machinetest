@@ -5,6 +5,7 @@ import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
 import 'package:product_api/feature/data/models/create_product_model/create_product_model.dart';
+import 'package:product_api/feature/views/product/widgets/videowidget.dart';
 import 'package:product_api/feature/views/state/cubit/carousal/carousalcubit_cubit.dart';
 import 'package:product_api/feature/views/state/cubit/playvideo/playvideo_cubit.dart';
 import 'package:video_player/video_player.dart';
@@ -18,18 +19,9 @@ class ProductOverview extends StatefulWidget {
 }
 
 VideoPlayerController? controller;
-initialzectrl(String url) {
-  controller = VideoPlayerController.networkUrl(Uri.parse(url))
-    ..initialize().then((_) {});
-}
 
 class _ProductOverviewState extends State<ProductOverview> {
   @override
-  void initState() {
-    initialzectrl(widget.product.productImage!);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -69,44 +61,26 @@ class _ProductOverviewState extends State<ProductOverview> {
                                       fit: BoxFit.cover,
                                     )))
                         : widget.product.productImage!.endsWith('.mp4')
-                            ? Stack(
-                                children: [
-                                  VideoPlayer(controller!),
-                                  controller!.value.isPlaying
-                                      ? InkWell(
-                                          onTap: () {
-                                            controller!.value.isPlaying
-                                                ? controller!.pause()
-                                                : controller!.play();
-                                            setState(() {});
-                                          },
-                                          child: SizedBox(
-                                            height: size.width - 100,
-                                            width: size.width,
-                                          ),
-                                        )
-                                      : Container(
-                                          height: size.width - 100,
-                                          width: size.width,
-                                          color: kcolorgrey.withOpacity(0.6),
-                                          child: Center(
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  controller!.value.isPlaying
-                                                      ? controller!.pause()
-                                                      : controller!.play();
-                                                  // setState(() {});
-                                                },
-                                                icon: Icon(
-                                                  controller!.value.isPlaying
-                                                      ? Iconsax.pause
-                                                      : Iconsax.play,
-                                                  color: kcolorred,
-                                                  size: 30,
-                                                )),
-                                          ),
-                                        )
-                                ],
+                            ? BlocBuilder<PlayvideoCubit, PlayvideoState>(
+                                builder: (context, state) {
+                                  return state.when(
+                                    initCtrl: (controller) => VideoCardWidget(
+                                        size: size,
+                                        controller: controller,
+                                        isPlaying: controller.value.isPlaying
+                                            ? true
+                                            : false),
+                                    playingstatus: (isPlaying, controller) =>
+                                        VideoCardWidget(
+                                      size: size,
+                                      controller: controller,
+                                      isPlaying: controller.value.isPlaying
+                                          ? true
+                                          : false,
+                                    ),
+                                    initial: () => const SizedBox(),
+                                  );
+                                },
                               )
                             : ClipRRect(
                                 child: Image.network(

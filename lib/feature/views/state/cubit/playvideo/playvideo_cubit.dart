@@ -10,7 +10,9 @@ class PlayvideoCubit extends Cubit<PlayvideoState> {
 
   changeplaystatus(VideoPlayerController controller) {
     controller.value.isPlaying ? controller.pause() : controller.play();
-    emit(Playingstatus(isPlaying: controller.value.isPlaying ? true : false));
+    emit(Playingstatus(
+        isPlaying: controller.value.isPlaying ? true : false,
+        controller: controller));
   }
 
   initcontroller(VideoPlayerController? controller, String url) {

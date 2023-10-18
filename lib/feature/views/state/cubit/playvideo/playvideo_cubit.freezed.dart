@@ -19,21 +19,24 @@ mixin _$PlayvideoState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(VideoPlayerController controller) initCtrl,
-    required TResult Function(bool isPlaying) playingstatus,
+    required TResult Function(bool isPlaying, VideoPlayerController controller)
+        playingstatus,
     required TResult Function() initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(VideoPlayerController controller)? initCtrl,
-    TResult? Function(bool isPlaying)? playingstatus,
+    TResult? Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult? Function()? initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(VideoPlayerController controller)? initCtrl,
-    TResult Function(bool isPlaying)? playingstatus,
+    TResult Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult Function()? initial,
     required TResult orElse(),
   }) =>
@@ -146,7 +149,8 @@ class _$InitCtrlImpl implements InitCtrl {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(VideoPlayerController controller) initCtrl,
-    required TResult Function(bool isPlaying) playingstatus,
+    required TResult Function(bool isPlaying, VideoPlayerController controller)
+        playingstatus,
     required TResult Function() initial,
   }) {
     return initCtrl(controller);
@@ -156,7 +160,8 @@ class _$InitCtrlImpl implements InitCtrl {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(VideoPlayerController controller)? initCtrl,
-    TResult? Function(bool isPlaying)? playingstatus,
+    TResult? Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult? Function()? initial,
   }) {
     return initCtrl?.call(controller);
@@ -166,7 +171,8 @@ class _$InitCtrlImpl implements InitCtrl {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(VideoPlayerController controller)? initCtrl,
-    TResult Function(bool isPlaying)? playingstatus,
+    TResult Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult Function()? initial,
     required TResult orElse(),
   }) {
@@ -227,7 +233,7 @@ abstract class _$$PlayingstatusImplCopyWith<$Res> {
           _$PlayingstatusImpl value, $Res Function(_$PlayingstatusImpl) then) =
       __$$PlayingstatusImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool isPlaying});
+  $Res call({bool isPlaying, VideoPlayerController controller});
 }
 
 /// @nodoc
@@ -242,12 +248,17 @@ class __$$PlayingstatusImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isPlaying = null,
+    Object? controller = null,
   }) {
     return _then(_$PlayingstatusImpl(
       isPlaying: null == isPlaying
           ? _value.isPlaying
           : isPlaying // ignore: cast_nullable_to_non_nullable
               as bool,
+      controller: null == controller
+          ? _value.controller
+          : controller // ignore: cast_nullable_to_non_nullable
+              as VideoPlayerController,
     ));
   }
 }
@@ -255,14 +266,17 @@ class __$$PlayingstatusImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$PlayingstatusImpl implements Playingstatus {
-  const _$PlayingstatusImpl({required this.isPlaying});
+  const _$PlayingstatusImpl(
+      {required this.isPlaying, required this.controller});
 
   @override
   final bool isPlaying;
+  @override
+  final VideoPlayerController controller;
 
   @override
   String toString() {
-    return 'PlayvideoState.playingstatus(isPlaying: $isPlaying)';
+    return 'PlayvideoState.playingstatus(isPlaying: $isPlaying, controller: $controller)';
   }
 
   @override
@@ -271,11 +285,13 @@ class _$PlayingstatusImpl implements Playingstatus {
         (other.runtimeType == runtimeType &&
             other is _$PlayingstatusImpl &&
             (identical(other.isPlaying, isPlaying) ||
-                other.isPlaying == isPlaying));
+                other.isPlaying == isPlaying) &&
+            (identical(other.controller, controller) ||
+                other.controller == controller));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isPlaying);
+  int get hashCode => Object.hash(runtimeType, isPlaying, controller);
 
   @JsonKey(ignore: true)
   @override
@@ -287,32 +303,35 @@ class _$PlayingstatusImpl implements Playingstatus {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(VideoPlayerController controller) initCtrl,
-    required TResult Function(bool isPlaying) playingstatus,
+    required TResult Function(bool isPlaying, VideoPlayerController controller)
+        playingstatus,
     required TResult Function() initial,
   }) {
-    return playingstatus(isPlaying);
+    return playingstatus(isPlaying, controller);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(VideoPlayerController controller)? initCtrl,
-    TResult? Function(bool isPlaying)? playingstatus,
+    TResult? Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult? Function()? initial,
   }) {
-    return playingstatus?.call(isPlaying);
+    return playingstatus?.call(isPlaying, controller);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(VideoPlayerController controller)? initCtrl,
-    TResult Function(bool isPlaying)? playingstatus,
+    TResult Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult Function()? initial,
     required TResult orElse(),
   }) {
     if (playingstatus != null) {
-      return playingstatus(isPlaying);
+      return playingstatus(isPlaying, controller);
     }
     return orElse();
   }
@@ -353,10 +372,12 @@ class _$PlayingstatusImpl implements Playingstatus {
 }
 
 abstract class Playingstatus implements PlayvideoState {
-  const factory Playingstatus({required final bool isPlaying}) =
-      _$PlayingstatusImpl;
+  const factory Playingstatus(
+      {required final bool isPlaying,
+      required final VideoPlayerController controller}) = _$PlayingstatusImpl;
 
   bool get isPlaying;
+  VideoPlayerController get controller;
   @JsonKey(ignore: true)
   _$$PlayingstatusImplCopyWith<_$PlayingstatusImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -401,7 +422,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(VideoPlayerController controller) initCtrl,
-    required TResult Function(bool isPlaying) playingstatus,
+    required TResult Function(bool isPlaying, VideoPlayerController controller)
+        playingstatus,
     required TResult Function() initial,
   }) {
     return initial();
@@ -411,7 +433,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(VideoPlayerController controller)? initCtrl,
-    TResult? Function(bool isPlaying)? playingstatus,
+    TResult? Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult? Function()? initial,
   }) {
     return initial?.call();
@@ -421,7 +444,8 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(VideoPlayerController controller)? initCtrl,
-    TResult Function(bool isPlaying)? playingstatus,
+    TResult Function(bool isPlaying, VideoPlayerController controller)?
+        playingstatus,
     TResult Function()? initial,
     required TResult orElse(),
   }) {

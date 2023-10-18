@@ -4,7 +4,6 @@ import 'package:iconsax/iconsax.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
 import 'package:product_api/feature/data/models/create_product_model/create_product_model.dart';
-import 'package:product_api/feature/domain/repoimpls/temp.dart';
 import 'package:product_api/feature/views/state/bloc/bloc/addproduct_bloc.dart';
 import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart';
 import 'package:product_api/feature/views/state/cubit/pickimage/pickimage_cubit.dart';
