@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
@@ -69,7 +70,8 @@ class _LoginWidgetState extends State<LoginWidget> {
                   controller: _passctrl,
                   type: TextInputType.name,
                   ispass: state.ispass,
-                  suficon: Icons.remove_red_eye,
+                  suficon:
+                      state.ispass ? Icons.remove_red_eye : Iconsax.eye_slash,
                 );
               },
             ),

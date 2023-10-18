@@ -24,10 +24,6 @@ class GetProductRepo implements IGetProductRepo {
           headers: {"Authorization": 'Bearer $token'});
       if (response.statusCode == 200) {
         log(response.body);
-        // final products = List<CreateProductModel>.from(jsonDecode(response.body)
-        //     .map((model) => CreateProductModel.fromJson(model)));
-        // // log(response.body);
-        // return right(products);
         final Map<String, dynamic> jsonMap = jsonDecode(response.body);
         final List<dynamic> productData = jsonMap['data'];
         // log(jsonMap['data']['ProductID']);

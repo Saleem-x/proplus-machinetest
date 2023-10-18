@@ -9,6 +9,7 @@ import 'package:product_api/feature/views/screens/home/widgets/listingwidget.dar
 import 'package:product_api/feature/views/screens/home/widgets/searchwidget.dart';
 import 'package:product_api/feature/views/screens/splash/splashscreen.dart';
 import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart';
+import 'package:product_api/feature/views/state/cubit/pickimage/pickimage_cubit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -70,6 +71,7 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
+            context.read<PickimageCubit>().clear();
             Navigator.push(
               context,
               MaterialPageRoute(

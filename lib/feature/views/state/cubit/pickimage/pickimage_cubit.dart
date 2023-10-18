@@ -20,4 +20,8 @@ class PickimageCubit extends Cubit<PickimageState> {
       emit(Imageurls(imageurls: data));
     }
   }
+
+  void clear() {
+    emit(PickimageState.initial());
+  }
 }

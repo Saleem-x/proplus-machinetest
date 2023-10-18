@@ -219,7 +219,7 @@ class _ProductOverviewState extends State<ProductOverview> {
                 ),
                 Flexible(
                   child: Text(
-                    widget.product.mrp ?? 'no description available',
+                    widget.product.productImage ?? 'no description available',
                     style: kprimaryfont(color: kcolorblack, fontSize: 12),
                   ),
                 ),

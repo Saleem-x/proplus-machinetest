@@ -39,6 +39,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
       body: BlocConsumer<AddproductBloc, AddproductState>(
         listener: (context, state) {
           state.when(
+            loadinstate: () => const Center(
+              child: CircularProgressIndicator(),
+            ),
             successState: () {
               context.read<GetproductsBloc>().add(const Getallproducts());
               ScaffoldMessenger.of(context).showSnackBar(
@@ -147,31 +150,33 @@ class _AddProductScreenState extends State<AddProductScreen> {
                         onTap: () {
                           context.read<PickimageCubit>().pickimage();
                         },
-                        child: DottedBorder(
-                          borderType: BorderType.RRect,
-                          radius: const Radius.circular(10),
-                          color: state.imageurls == null
-                              ? kcolorred
-                              : Colors.green,
-                          strokeWidth: 2,
-                          padding: const EdgeInsets.all(7),
-                          strokeCap: StrokeCap.butt,
-                          child: SizedBox(
-                            height: size.height * 0.05,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  Icons.file_upload_outlined,
-                                  color: kcolorred,
-                                ),
-                                Text(
-                                  'Upload Product Image/ Video',
-                                  style: kprimaryfont(
+                        child: state.when(
+                          imageurls: (imageurls) => DottedBorder(
+                            borderType: BorderType.RRect,
+                            radius: const Radius.circular(10),
+                            color: state.imageurls == null
+                                ? kcolorred
+                                : Colors.green,
+                            strokeWidth: 2,
+                            padding: const EdgeInsets.all(7),
+                            strokeCap: StrokeCap.butt,
+                            child: SizedBox(
+                              height: size.height * 0.05,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    Icons.file_upload_outlined,
                                     color: kcolorred,
                                   ),
-                                ),
-                              ],
+                                  Text(
+                                    'Upload Product Image/ Video',
+                                    style: kprimaryfont(
+                                      color: kcolorred,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -233,6 +238,11 @@ class _AddProductScreenState extends State<AddProductScreen> {
 
   @override
   void dispose() {
+    _prcodectrl.clear();
+    _prdesctrl.clear();
+    _prnamectrl.clear();
+    _prpricectrl.clear();
+
     super.dispose();
   }
 }

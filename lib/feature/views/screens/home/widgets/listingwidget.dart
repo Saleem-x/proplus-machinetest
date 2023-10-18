@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_api/core/api/endpoints.dart';
 import 'package:product_api/core/constents/colors/kcolors.dart';
 import 'package:product_api/core/constents/fonts/kfonts.dart';
+import 'package:product_api/feature/domain/repoimpls/getProductrepo.dart';
 import 'package:product_api/feature/views/product/productview.dart';
 import 'package:product_api/feature/views/screens/home/widgets/productskelton.dart';
 import 'package:product_api/feature/views/state/bloc/getproduct/getproducts_bloc.dart';
@@ -125,13 +126,28 @@ class ProductListingWidget extends StatelessWidget {
                   },
                 ),
           failedState: (error) => SizedBox(
-            child: Column(children: [
-              Text(
-                'Something went wrong\n please refresh',
-                style: kprimaryfont(color: kcolorblack),
-                textAlign: TextAlign.center,
-              )
-            ]),
+            child: RefreshIndicator(
+              onRefresh: () {
+                context.read<GetproductsBloc>().add(const Getallproducts());
+                return GetProductRepo().getAllProducts();
+              },
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        context
+                            .read<GetproductsBloc>()
+                            .add(const Getallproducts());
+                      },
+                      child: Text(
+                        'Something went wrong\n please refresh',
+                        style: kprimaryfont(color: kcolorblack),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ]),
+            ),
           ),
         );
       },

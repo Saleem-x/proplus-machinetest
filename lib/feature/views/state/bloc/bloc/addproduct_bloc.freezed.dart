@@ -252,6 +252,7 @@ mixin _$AddproductState {
   TResult when<TResult extends Object?>({
     required TResult Function() successState,
     required TResult Function() failedState,
+    required TResult Function() loadinstate,
     required TResult Function() initial,
   }) =>
       throw _privateConstructorUsedError;
@@ -259,6 +260,7 @@ mixin _$AddproductState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? successState,
     TResult? Function()? failedState,
+    TResult? Function()? loadinstate,
     TResult? Function()? initial,
   }) =>
       throw _privateConstructorUsedError;
@@ -266,6 +268,7 @@ mixin _$AddproductState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? successState,
     TResult Function()? failedState,
+    TResult Function()? loadinstate,
     TResult Function()? initial,
     required TResult orElse(),
   }) =>
@@ -274,6 +277,7 @@ mixin _$AddproductState {
   TResult map<TResult extends Object?>({
     required TResult Function(SusccessState value) successState,
     required TResult Function(FailedState value) failedState,
+    required TResult Function(loadinstate value) loadinstate,
     required TResult Function(_Initial value) initial,
   }) =>
       throw _privateConstructorUsedError;
@@ -281,6 +285,7 @@ mixin _$AddproductState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SusccessState value)? successState,
     TResult? Function(FailedState value)? failedState,
+    TResult? Function(loadinstate value)? loadinstate,
     TResult? Function(_Initial value)? initial,
   }) =>
       throw _privateConstructorUsedError;
@@ -288,6 +293,7 @@ mixin _$AddproductState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SusccessState value)? successState,
     TResult Function(FailedState value)? failedState,
+    TResult Function(loadinstate value)? loadinstate,
     TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) =>
@@ -352,6 +358,7 @@ class _$SusccessStateImpl implements SusccessState {
   TResult when<TResult extends Object?>({
     required TResult Function() successState,
     required TResult Function() failedState,
+    required TResult Function() loadinstate,
     required TResult Function() initial,
   }) {
     return successState();
@@ -362,6 +369,7 @@ class _$SusccessStateImpl implements SusccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? successState,
     TResult? Function()? failedState,
+    TResult? Function()? loadinstate,
     TResult? Function()? initial,
   }) {
     return successState?.call();
@@ -372,6 +380,7 @@ class _$SusccessStateImpl implements SusccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? successState,
     TResult Function()? failedState,
+    TResult Function()? loadinstate,
     TResult Function()? initial,
     required TResult orElse(),
   }) {
@@ -386,6 +395,7 @@ class _$SusccessStateImpl implements SusccessState {
   TResult map<TResult extends Object?>({
     required TResult Function(SusccessState value) successState,
     required TResult Function(FailedState value) failedState,
+    required TResult Function(loadinstate value) loadinstate,
     required TResult Function(_Initial value) initial,
   }) {
     return successState(this);
@@ -396,6 +406,7 @@ class _$SusccessStateImpl implements SusccessState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SusccessState value)? successState,
     TResult? Function(FailedState value)? failedState,
+    TResult? Function(loadinstate value)? loadinstate,
     TResult? Function(_Initial value)? initial,
   }) {
     return successState?.call(this);
@@ -406,6 +417,7 @@ class _$SusccessStateImpl implements SusccessState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SusccessState value)? successState,
     TResult Function(FailedState value)? failedState,
+    TResult Function(loadinstate value)? loadinstate,
     TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) {
@@ -460,6 +472,7 @@ class _$FailedStateImpl implements FailedState {
   TResult when<TResult extends Object?>({
     required TResult Function() successState,
     required TResult Function() failedState,
+    required TResult Function() loadinstate,
     required TResult Function() initial,
   }) {
     return failedState();
@@ -470,6 +483,7 @@ class _$FailedStateImpl implements FailedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? successState,
     TResult? Function()? failedState,
+    TResult? Function()? loadinstate,
     TResult? Function()? initial,
   }) {
     return failedState?.call();
@@ -480,6 +494,7 @@ class _$FailedStateImpl implements FailedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? successState,
     TResult Function()? failedState,
+    TResult Function()? loadinstate,
     TResult Function()? initial,
     required TResult orElse(),
   }) {
@@ -494,6 +509,7 @@ class _$FailedStateImpl implements FailedState {
   TResult map<TResult extends Object?>({
     required TResult Function(SusccessState value) successState,
     required TResult Function(FailedState value) failedState,
+    required TResult Function(loadinstate value) loadinstate,
     required TResult Function(_Initial value) initial,
   }) {
     return failedState(this);
@@ -504,6 +520,7 @@ class _$FailedStateImpl implements FailedState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SusccessState value)? successState,
     TResult? Function(FailedState value)? failedState,
+    TResult? Function(loadinstate value)? loadinstate,
     TResult? Function(_Initial value)? initial,
   }) {
     return failedState?.call(this);
@@ -514,6 +531,7 @@ class _$FailedStateImpl implements FailedState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SusccessState value)? successState,
     TResult Function(FailedState value)? failedState,
+    TResult Function(loadinstate value)? loadinstate,
     TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) {
@@ -526,6 +544,120 @@ class _$FailedStateImpl implements FailedState {
 
 abstract class FailedState implements AddproductState {
   const factory FailedState() = _$FailedStateImpl;
+}
+
+/// @nodoc
+abstract class _$$loadinstateImplCopyWith<$Res> {
+  factory _$$loadinstateImplCopyWith(
+          _$loadinstateImpl value, $Res Function(_$loadinstateImpl) then) =
+      __$$loadinstateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$loadinstateImplCopyWithImpl<$Res>
+    extends _$AddproductStateCopyWithImpl<$Res, _$loadinstateImpl>
+    implements _$$loadinstateImplCopyWith<$Res> {
+  __$$loadinstateImplCopyWithImpl(
+      _$loadinstateImpl _value, $Res Function(_$loadinstateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$loadinstateImpl implements loadinstate {
+  const _$loadinstateImpl();
+
+  @override
+  String toString() {
+    return 'AddproductState.loadinstate()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$loadinstateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() successState,
+    required TResult Function() failedState,
+    required TResult Function() loadinstate,
+    required TResult Function() initial,
+  }) {
+    return loadinstate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? successState,
+    TResult? Function()? failedState,
+    TResult? Function()? loadinstate,
+    TResult? Function()? initial,
+  }) {
+    return loadinstate?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? successState,
+    TResult Function()? failedState,
+    TResult Function()? loadinstate,
+    TResult Function()? initial,
+    required TResult orElse(),
+  }) {
+    if (loadinstate != null) {
+      return loadinstate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SusccessState value) successState,
+    required TResult Function(FailedState value) failedState,
+    required TResult Function(loadinstate value) loadinstate,
+    required TResult Function(_Initial value) initial,
+  }) {
+    return loadinstate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SusccessState value)? successState,
+    TResult? Function(FailedState value)? failedState,
+    TResult? Function(loadinstate value)? loadinstate,
+    TResult? Function(_Initial value)? initial,
+  }) {
+    return loadinstate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SusccessState value)? successState,
+    TResult Function(FailedState value)? failedState,
+    TResult Function(loadinstate value)? loadinstate,
+    TResult Function(_Initial value)? initial,
+    required TResult orElse(),
+  }) {
+    if (loadinstate != null) {
+      return loadinstate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class loadinstate implements AddproductState {
+  const factory loadinstate() = _$loadinstateImpl;
 }
 
 /// @nodoc
@@ -568,6 +700,7 @@ class _$InitialImpl implements _Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() successState,
     required TResult Function() failedState,
+    required TResult Function() loadinstate,
     required TResult Function() initial,
   }) {
     return initial();
@@ -578,6 +711,7 @@ class _$InitialImpl implements _Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? successState,
     TResult? Function()? failedState,
+    TResult? Function()? loadinstate,
     TResult? Function()? initial,
   }) {
     return initial?.call();
@@ -588,6 +722,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? successState,
     TResult Function()? failedState,
+    TResult Function()? loadinstate,
     TResult Function()? initial,
     required TResult orElse(),
   }) {
@@ -602,6 +737,7 @@ class _$InitialImpl implements _Initial {
   TResult map<TResult extends Object?>({
     required TResult Function(SusccessState value) successState,
     required TResult Function(FailedState value) failedState,
+    required TResult Function(loadinstate value) loadinstate,
     required TResult Function(_Initial value) initial,
   }) {
     return initial(this);
@@ -612,6 +748,7 @@ class _$InitialImpl implements _Initial {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SusccessState value)? successState,
     TResult? Function(FailedState value)? failedState,
+    TResult? Function(loadinstate value)? loadinstate,
     TResult? Function(_Initial value)? initial,
   }) {
     return initial?.call(this);
@@ -622,6 +759,7 @@ class _$InitialImpl implements _Initial {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SusccessState value)? successState,
     TResult Function(FailedState value)? failedState,
+    TResult Function(loadinstate value)? loadinstate,
     TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) {

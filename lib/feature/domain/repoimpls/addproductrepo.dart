@@ -21,10 +21,11 @@ class AddProductRepo implements IADDProductRepo {
 
       final token = sharedprefs.getString('user');
       var request = http.MultipartRequest('POST', Uri.parse(createproduct));
-
+      log(imgfile.path.split('.').last.toLowerCase());
       request.files.add(await http.MultipartFile.fromPath(
           'ProductImage', imgfile.path,
-          filename: '${product.productCode}/image.jpg'));
+          filename:
+              '${product.productCode}/image.${imgfile.path.split('.').last.toLowerCase()}'));
       request.headers['Authorization'] = "Bearer $token";
       request.fields['ProductID'] = product.productCode!;
       request.fields['ProductCode'] = product.productCode!;
@@ -47,4 +48,10 @@ class AddProductRepo implements IADDProductRepo {
       return left(const MainFailures.clientfailure());
     }
   }
+}
+
+String isImage(XFile file) {
+  // final imageExtensions = ['.jpg', '.jpeg', '.png', '.gif'];
+  final extension = file.path.split('.').last.toLowerCase();
+  return extension;
 }
